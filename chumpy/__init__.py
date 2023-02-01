@@ -6,9 +6,6 @@ from . import extras
 from . import testing
 from .version import version as __version__
 
-from .version import version as __version__
-
-from numpy import bool, int, float, complex, object, unicode, str, nan, inf
 
 def test():
     from os.path import split
