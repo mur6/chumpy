@@ -10,15 +10,18 @@ from .version import version as __version__
 def test():
     from os.path import split
     import unittest
-    test_loader= unittest.TestLoader()
+
+    test_loader = unittest.TestLoader()
     test_loader = test_loader.discover(split(__file__)[0])
     test_runner = unittest.TextTestRunner()
-    test_runner.run( test_loader )
+    test_runner.run(test_loader)
 
 
 demos = {}
 
-demos['scalar'] = """
+demos[
+    "scalar"
+] = """
 import chumpy as ch
 
 [x1, x2, x3] = ch.array(10), ch.array(20), ch.array(30)
@@ -27,7 +30,9 @@ print(result) # prints [ 60.]
 print(result.dr_wrt(x1)) # prints 1
 """
 
-demos['show_tree'] = """
+demos[
+    "show_tree"
+] = """
 import chumpy as ch
 
 [x1, x2, x3] = ch.array(10), ch.array(20), ch.array(30)
@@ -41,7 +46,9 @@ x3.label='x3' # for clarity in show_tree()
 x2.show_tree(cachelim=1e-4) # in MB
 """
 
-demos['matrix'] = """
+demos[
+    "matrix"
+] = """
 import chumpy as ch
 
 x1, x2, x3, x4 = ch.eye(10), ch.array(1), ch.array(5), ch.array(10)
@@ -50,7 +57,9 @@ print(y)
 print(y.dr_wrt(x2))
 """
 
-demos['linalg'] = """
+demos[
+    "linalg"
+] = """
 import chumpy as ch
 
 m = [ch.random.randn(100).reshape((10,10)) for i in range(3)]
@@ -59,7 +68,9 @@ print(y.shape)
 print(y.dr_wrt(m[0]).shape)
 """
 
-demos['inheritance'] = """
+demos[
+    "inheritance"
+] = """
 import chumpy as ch
 import numpy as np
 
@@ -82,7 +93,9 @@ print(result.r)
 print(result.dr_wrt(x1))
 """
 
-demos['optimization'] = """
+demos[
+    "optimization"
+] = """
 import chumpy as ch
 
 x = ch.zeros(10)
@@ -100,16 +113,14 @@ print(y) # should be all 0.5
 """
 
 
-
-
 def demo(which=None):
     if which not in demos:
-        print('Please indicate which demo you want, as follows:')
+        print("Please indicate which demo you want, as follows:")
         for key in demos:
             print("\tdemo('%s')" % (key,))
         return
 
-    print('- - - - - - - - - - - <CODE> - - - - - - - - - - - -')
+    print("- - - - - - - - - - - <CODE> - - - - - - - - - - - -")
     print(demos[which])
-    print('- - - - - - - - - - - </CODE> - - - - - - - - - - - -\n')
-    exec('global np\n' + demos[which], globals(), locals())
+    print("- - - - - - - - - - - </CODE> - - - - - - - - - - - -\n")
+    exec("global np\n" + demos[which], globals(), locals())
